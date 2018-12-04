@@ -2,7 +2,6 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	. "www.alisleepy.com/apis" //api部分
 	. "www.alisleepy.com/controllers" //constroller部分
 )
 
@@ -13,7 +12,7 @@ func InitRouter() *gin.Engine{
 	router.GET("/", Index)
 
 	//渲染html页面
-	router.LoadHTMLGlob("views/*")
+	/*router.LoadHTMLGlob("views/*")
 	router.GET("/home/index", ShowHtmlPage)
 
 	//列表页面
@@ -30,7 +29,7 @@ func InitRouter() *gin.Engine{
 	router.POST("home/saveedit", EditPersonApi)
 
 	//删除数据
-	router.GET("home/delete", DeletePersonApi)
+	router.GET("home/delete", DeletePersonApi)*/
 
 	return router
 }
