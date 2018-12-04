@@ -2,15 +2,15 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	. "ginweb/apis" //api部分
-	//. "ginweb/controllers" //constroller部分
+	. "www.alisleepy.com/apis" //api部分
+	. "www.alisleepy.com/controllers" //constroller部分
 )
 
 func InitRouter() *gin.Engine{
 	router := gin.Default()
 
-	//hellow alisleepy页面
-	router.GET("/", IndexApi)
+	//首页
+	router.GET("/", Index)
 
 	//渲染html页面
 	router.LoadHTMLGlob("views/*")

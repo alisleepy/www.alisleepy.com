@@ -1,18 +1,19 @@
 package main
 
 import (
-	db "ginweb/database"
-	"ginweb/routers"
+	db "www.alisleepy.com/database"
+	"www.alisleepy.com/routers"
 )
 
+//入口部分
 func main(){
-	//数据库部分
+	//1、执行数据库部分
 	defer db.SqlDB.Close()
 
-	//路由部分
+	//2、执行路由部分
 	router := routers.InitRouter()
 
-	//静态资源
+	//3、设置静态资源
 	router.Static("/static", "./static")
 
 	//运行端口
