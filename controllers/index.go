@@ -1,20 +1,20 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"html/template"
 	"log"
-	"fmt"
+	"net/http"
 )
 
 //博客首页
 func Index(this *gin.Context){
 	//模板文件的拼接
 	t, err := template.ParseFiles(
-		"views/public/head.html",
-		"views/public/header.html",
-		"views/public/footer.html",
+		"views/header.html",
+		"views/head.html",
+		"views/footer.html",
 	)
 	if err != nil {
 		log.Fatal(err)
@@ -24,5 +24,4 @@ func Index(this *gin.Context){
 	this.HTML(http.StatusOK,"index.html", gin.H{
 		"title": "布局页面",
 	})
-	//this.String(http.StatusOK, "alisleepy")
 }

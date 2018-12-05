@@ -16,6 +16,9 @@ func main(){
 	//3、设置静态资源
 	router.Static("/static", "./static")
 
+	//4、设置模板文件目录
+	router.LoadHTMLGlob("views/*")
+
 	//运行端口
 	router.Run(":8888")
 }

@@ -12,8 +12,8 @@ func InitRouter() *gin.Engine{
 	router.GET("/", Index)
 
 	//渲染html页面
-	/*router.LoadHTMLGlob("views/*")
-	router.GET("/home/index", ShowHtmlPage)
+	router.LoadHTMLGlob("views/*")
+	/*router.GET("/home/index", ShowHtmlPage)
 
 	//列表页面
 	router.GET("/home/list", ListHtml)
