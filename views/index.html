@@ -1,11 +1,12 @@
+<!doctype html>
+<html lang="zh-CN">
 <!--放head信息 start-->
-
+{{template "head ."}}
 <!--放head信息 end-->
 <body class="user-select">
 	<!--放header导航栏信息 start-->
-
+	{{template "header"}}
 	<!--放header导航栏信息 end-->
-
 	<!--中间主体部分 start-->
 	<section class="container">
 		<div class="content-wrap">
@@ -49,13 +50,15 @@
 					<p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
 				</article>
 				<div class="title">
-					<h3>最新发布</h3>
+					<h3>文章分类</h3>
 					<div class="more">
+						<!--文章分类 start-->
 						<a href="#" title="MZ-NetBlog主题" >MZ-NetBlog主题</a>
 						<a href="#" title="IT技术笔记" >IT技术笔记</a>
 						<a href="#" title="源码分享" >源码分享</a>
 						<a href="#" title="靠谱网赚" >靠谱网赚</a>
 						<a href="#" title="资讯分享" >资讯分享</a>
+						<!--文章分类 end-->
 					</div>
 				</div>
 				<!--文章列表 start-->
@@ -144,9 +147,8 @@
 		</aside>
 	</section>
 	<!--中间主体部分 end-->
-
 	<!--footer部分 start-->
-
+	{{template "footer"}}
 	<!--footer部分 end-->
 </body>
 </html>

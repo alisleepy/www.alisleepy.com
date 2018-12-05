@@ -17,5 +17,5 @@ func main(){
 	router.Static("/static", "./static")
 
 	//运行端口
-	router.Run(":8000")
+	router.Run(":8888")
 }
