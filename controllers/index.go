@@ -25,3 +25,10 @@ func Index(this *gin.Context){
 		"title": "布局页面",
 	})
 }
+//置顶3篇文章
+func GetTopBlog(this *gin.Context){
+	//获取置顶文章
+	this.JSON(http.StatusOK, gin.H{
+
+	})
+}
