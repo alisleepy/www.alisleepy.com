@@ -6,6 +6,8 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
+	. "www.alisleepy.com/models"
 )
 
 //博客首页
@@ -27,8 +29,16 @@ func Index(this *gin.Context){
 }
 //置顶3篇文章
 func GetTopBlog(this *gin.Context){
+	datas := GetTopBlogs()
+	num := len(datas)
+	if num > 0 {
+		code := 200
+	} else {
+		code := 0
+	}
 	//获取置顶文章
 	this.JSON(http.StatusOK, gin.H{
-
+		"code":code,
+		"data":datas,
 	})
 }
