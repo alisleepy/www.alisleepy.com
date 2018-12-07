@@ -1,3 +1,9 @@
+/**
+ * Created by Goland.
+ * User: wangkaikai
+ * Date: 2018/12/05
+ * Time: 21:03
+ */
 package routers
 
 import (
@@ -13,8 +19,13 @@ func InitRouter() *gin.Engine{
 
 	//渲染html页面
 	router.LoadHTMLGlob("views/*")
-	router.GET("/home/topBlog", GetTopBlog)
 
+	//获取置顶文章列表
+	router.GET("/home/getTopBlog", GetTopBlog)
+	//获取单个文章
+	router.GET("/home/getBlogInfo", GetBlogInfo)
+	//获取文章分类列表
+	router.GET("/home/getCategorys", GetCategorys)
 	//列表页面
 	//router.GET("/home/list", ListHtml)
 	//router.POST("/home/PageData", GetDataList)

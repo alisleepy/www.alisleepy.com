@@ -1,3 +1,9 @@
+/**
+ * Created by Goland.
+ * User: wangkaikai
+ * Date: 2018/12/05
+ * Time: 21:03
+ */
 package main
 
 import (
@@ -20,5 +26,5 @@ func main(){
 	router.LoadHTMLGlob("views/*")
 
 	//运行端口
-	router.Run(":8080")
+	router.Run(":306")
 }

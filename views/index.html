@@ -23,24 +23,14 @@
 				</div>
 				<!--滚动图 end-->
 				<!--推荐单篇文章-->
-				<article class="excerpt-minic excerpt-minic-index">
-					<h2>
-						<span class="red">【推荐】</span>
-						<a target="_blank" href="#" title="用DTcms做一个独立博客网站（响应式模板）" >
-							用DTcms做一个独立博客网站（响应式模板）
-						</a>
-					</h2>
-					<p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
-				</article>
+				<div id="topBlogs">
+					<!--异步获取置顶文章-->
+				</div>
 				<div class="title">
 					<h3>文章分类</h3>
-					<div class="more">
+					<div id="categorys" class="more">
 						<!--文章分类 start-->
 						<a href="#" title="MZ-NetBlog主题" >MZ-NetBlog主题</a>
-						<a href="#" title="IT技术笔记" >IT技术笔记</a>
-						<a href="#" title="源码分享" >源码分享</a>
-						<a href="#" title="靠谱网赚" >靠谱网赚</a>
-						<a href="#" title="资讯分享" >资讯分享</a>
 						<!--文章分类 end-->
 					</div>
 				</div>
@@ -134,4 +124,5 @@
 	{{template "footer"}}
 	<!--footer部分 end-->
 </body>
+<script src="/static/js/index.js"></script>
 </html>

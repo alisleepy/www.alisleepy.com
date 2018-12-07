@@ -1,3 +1,9 @@
+/**
+ * Created by Goland.
+ * User: wangkaikai
+ * Date: 2018/12/05
+ * Time: 21:03
+ */
 package controllers
 
 import (
@@ -6,8 +12,8 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"strconv"
 	. "www.alisleepy.com/models"
+	"strconv"
 )
 
 //博客首页
@@ -29,16 +35,40 @@ func Index(this *gin.Context){
 }
 //置顶3篇文章
 func GetTopBlog(this *gin.Context){
-	datas := GetTopBlogs()
+	datas := GetTopBlogList()
 	num := len(datas)
+	var code int
 	if num > 0 {
-		code := 200
+		code = 200
 	} else {
-		code := 0
+		code = 0
 	}
 	//获取置顶文章
 	this.JSON(http.StatusOK, gin.H{
 		"code":code,
 		"data":datas,
 	})
+}
+//获取单篇文章
+func GetBlogInfo(this *gin.Context){
+	bId := this.Query("bId")
+	id, err := strconv.Atoi(bId)
+	if err != nil{
+		log.Fatalln(err)
+	}
+	var code int
+	data := GetBlogInfoData(id)
+	if data == nil{
+		code = 0
+		fmt.Println("blog data is empty")
+	}else{
+		code = 200
+	}
+	this.JSON(http.StatusOK, gin.H{
+		"code" : code,
+		"data" : data,
+	})
+}
+func GetCategorys(this *gin.Context){
+	datas := GetCategoryList()
 }

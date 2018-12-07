@@ -1,7 +1,15 @@
+/**
+ * Created by Goland.
+ * User: wangkaikai
+ * Date: 2018/12/05
+ * Time: 21:03
+ */
 package models
 
 import (
 	db "www.alisleepy.com/database"
+	"log"
+	"fmt"
 )
 
 type Ali_blog struct {
@@ -23,10 +31,10 @@ type Ali_blog struct {
 }
 
 //获取推荐文章，3条
-func GetTopBlogs()(blogs []Ali_blog){
+func GetTopBlogList()(blogs []Ali_blog){
 	blogs = make([]Ali_blog,0) //定义一个切片存放数据
 	//查询推荐博客
-	rows, err := db.SqlDB.Query("select bId,bTitle,bInfo,vViews,vReply_num from ali_blog where bStatus = 1 and is_top = 1 limit 3")
+	rows, err := db.SqlDB.Query("select bId,bTitle,bInfo,vViews,vReply_num from ali_blog where bStatus = 1 and is_top = 1 order by add_time desc limit 1")
 	if err != nil{
 		return nil
 	}
@@ -41,4 +49,31 @@ func GetTopBlogs()(blogs []Ali_blog){
 		return nil
 	}
 	return blogs
+}
+//获取单篇文章
+func GetBlogInfoData(id int)(b *Ali_blog){
+	fmt.Println(id)
+	var blog Ali_blog
+	err := db.SqlDB.QueryRow("select * from ali_blog where bId = ?", id).Scan(
+		&blog.BId,
+		&blog.AId,
+		&blog.CatId,
+		&blog.BTitle,
+		&blog.BInfo,
+		&blog.BPic,
+		&blog.BContent,
+		&blog.LId,
+		&blog.Is_top,
+		&blog.Add_time,
+		&blog.Update_time,
+		&blog.VViews,
+		&blog.VReply_num,
+		&blog.BStatus,
+		&blog.AllowReply,
+	)
+	if err != nil{
+		log.Println(err)
+		return
+	}
+	return &blog
 }
