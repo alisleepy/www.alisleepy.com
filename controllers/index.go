@@ -69,6 +69,19 @@ func GetBlogInfo(this *gin.Context){
 		"data" : data,
 	})
 }
+//获取文章分类列表
 func GetCategorys(this *gin.Context){
 	datas := GetCategoryList()
+	num := len(datas)
+	fmt.Println(num)
+	var code int
+	if num >0 {
+		code = 200
+	}else{
+		code = 0
+	}
+	this.JSON(http.StatusOK, gin.H{
+		"code" : code,
+		"data" : datas,
+	})
 }

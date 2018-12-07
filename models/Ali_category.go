@@ -15,8 +15,8 @@ type Ali_category struct {
 	CatName string `json:"catName" form:"catName"`
 }
 
-func GetCategoryList()(categorys[] *Ali_category){
-	datas, err := db.SqlDB.Query("select * from ali_catogory")
+func GetCategoryList()(categorys []Ali_category){
+	datas, err := db.SqlDB.Query("select * from ali_category")
 	if err != nil{
 		log.Println(err)
 	}

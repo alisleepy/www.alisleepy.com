@@ -10,17 +10,17 @@ $(function(){
     //获取文章分类列表
     getBlogsCategorys();
     //获取文章列表（默认第一页）
-    getPageBlogs();
-    //获取统计信息
-    getSiteCounts();
-    //获取站长信息、
-    getUserInfo();
-    //获取点击排行前5的文章
-    getTopViewBlogs();
-    //获取友链
-    getFriendlyUrls();
-    //获取底部备案信息
-    getFooterInfo();
+    // getPageBlogs();
+    // //获取统计信息
+    // getSiteCounts();
+    // //获取站长信息、
+    // getUserInfo();
+    // //获取点击排行前5的文章
+    // getTopViewBlogs();
+    // //获取友链
+    // getFriendlyUrls();
+    // //获取底部备案信息
+    // getFooterInfo();
 })
 //获取推荐文章
 function getTopBlogs(){
@@ -54,10 +54,12 @@ function getBlogsCategorys(){
     $.get(url, function(data){
         if(data.code == 200){
             var categoryObj = $("#categorys");
-            datas = data.data;
+            var datas = data.data;
+            var category_html_str = '';
             for(i in datas){
-                var category_html_str = '';
-                category_html_str += '<a href="/home/getBlogList?cId='+datas[i].cId+'">'+datas[i].cName+'</a>'
+                console.log(i);
+                console.log(datas[i].catName);
+                category_html_str += '<a href="/home/getBlogsList?catId='+datas[i].catId+'">'+datas[i].catName+'</a>';
             }
             categoryObj.append(category_html_str);
         }else{
