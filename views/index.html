@@ -7,6 +7,12 @@
 	<!--放header导航栏信息 start-->
 	{{template "header"}}
 	<!--放header导航栏信息 end-->
+    <!--当前页码-->
+    <input type="hidden" id="curpage" value="{{.curpage}}">
+    <!--当前分类ID-->
+    <input type="hidden" id="catId" value="{{.catId}}">
+    <!--当前标签ID-->
+    <input type="hidden" id="lId" value="{{.lId}}">
 	<!--中间主体部分 start-->
 	<section class="container">
 		<div class="content-wrap">
@@ -29,13 +35,11 @@
 				<div class="title">
 					<h3>分类</h3>
 					<div id="categorys" class="more">
-						<!--文章分类 start-->
 
-						<!--文章分类 end-->
 					</div>
 				</div>
 				<!--文章列表 start-->
-				<article class="excerpt excerpt-1" style="">
+				<article class="excerpt excerpt-1" id="blogs" style="">
 					<a class="focus" href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" ><img class="thumb" data-original="/static/images/201610181739277776.jpg" src="/static/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: inline;"></a>
 					<header><a class="cat" href="#" title="MZ-NetBlog主题" >MZ-NetBlog主题<i></i></a>
 						<h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" >用DTcms做一个独立博客网站（响应式模板）</a>

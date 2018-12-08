@@ -27,14 +27,6 @@ function getsec(str) {
 		return str1 * 24 * 60 * 60 * 1000
 	}
 }
-function getCookie(name) {
-	var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-	if (arr = document.cookie.match(reg)) {
-		return unescape(arr[2])
-	} else {
-		return null
-	}
-}
 $.fn.navSmartFloat = function() {
 	var position = function(element) {
 			var top = element.position().top,
@@ -66,7 +58,6 @@ $.fn.navSmartFloat = function() {
 		position($(this))
 	})
 };
-$("#navbar").navSmartFloat();
 $("#gotop").hide();
 $(window).scroll(function() {
 	if ($(window).scrollTop() > 100) {
@@ -80,33 +71,7 @@ $("#gotop").click(function() {
 		'scrollTop': 0
 	}, 500)
 });
-$("img.thumb").lazyload({
-	placeholder: "../images/occupying.png",
-	effect: "fadeIn"
-});
-$(".single .content img").lazyload({
-	placeholder: "../images/occupying.png",
-	effect: "fadeIn"
-});
 $('[data-toggle="tooltip"]').tooltip();
-jQuery.ias({
-	history: false,
-	container: '.content',
-	item: '.excerpt',
-	pagination: '.pagination',
-	next: '.next-page a',
-	trigger: '查看更多',
-	loader: '<div class="pagination-loading"><img src="/static/images/loading.gif" /></div>',
-	triggerPageThreshold: 5,
-	onRenderComplete: function() {
-		$('.excerpt .thumb').lazyload({
-			placeholder: '../images/occupying.png',
-			threshold: 400
-		});
-		$('.excerpt img').attr('draggable', 'false');
-		$('.excerpt a').attr('draggable', 'false')
-	}
-});
 $(window).scroll(function() {
 	var sidebar = $('.sidebar');
 	var sidebarHeight = sidebar.height();
@@ -128,20 +93,3 @@ document.onkeydown = function(event) {
 		return false
 	}
 };
-try {
-	if (window.console && window.console.log) {
-		console.log("\n欢迎访问站长素材！\n\n");
-		console.log("\n请记住我们的网址：%c sc.chinaz.com", "color:red")
-	}
-} catch (e) {};
-
-function SiteSearch(send_url, divTgs) {
-	var str = $.trim($(divTgs).val());
-	if (str.length > 0 && str != "请输入关键字") {
-		str = str.replace(/\s+/g, "");
-		str = str.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\，|\。|\：|\；|\·|\~|\！|\、|\《|\》|\‘|\“|\”|\【|\】|\?{|\}|\-|\=|\——|\+|\’|\—|\？]/g, "");
-		str = str.replace(/<[^>]*>|/g, "");
-		window.location.href = send_url + "?keyword=" + encodeURI(str)
-	}
-	return false
-}

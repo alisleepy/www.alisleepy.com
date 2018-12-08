@@ -10,7 +10,7 @@ $(function(){
     //获取文章分类列表
     getBlogsCategorys();
     //获取文章列表（默认第一页）
-    // getPageBlogs();
+    getPageBlogs();
     // //获取统计信息
     // getSiteCounts();
     // //获取站长信息、
@@ -52,8 +52,8 @@ function getTopBlogs(){
 function getBlogsCategorys(){
     var url = "/home/getCategorys";
     $.get(url, function(data){
+        var categoryObj = $("#categorys");
         if(data.code == 200){
-            var categoryObj = $("#categorys");
             var datas = data.data;
             var category_html_str = '';
             for(i in datas){
@@ -63,7 +63,24 @@ function getBlogsCategorys(){
             }
             categoryObj.append(category_html_str);
         }else{
-            categoryObj.append('暂无文章分类');
+            categoryObj.append('<span>暂无文章分类</span>');
+        }
+    }, "json");
+}
+//获取首页文章列表
+function getPageBlogs(){
+    var curpage = $("#curpage").val();
+    var catId = $("#catId").val();
+    var lId = $("#lId").val();
+    var url = "/home/ajaxGetBlogs";
+    var param = {curpage:curpage, catId:catId, lId:lId};
+    $.get(url, param, function(data){
+        console.log(data);
+        var blogObj = $("#blogs");
+        if(data.code == 200){
+
+        }else{
+            blogObj.append('<span>我可是有底线的！！</span>');
         }
     }, "json");
 }

@@ -13,7 +13,7 @@ import (
 	"log"
 	"net/http"
 	. "www.alisleepy.com/models"
-	"strconv"
+	//"strconv"
 )
 
 //博客首页
@@ -30,7 +30,10 @@ func Index(this *gin.Context){
 	fmt.Println(t)
 	//渲染html文件
 	this.HTML(http.StatusOK,"index.html", gin.H{
-		"title": "布局页面",
+		"title" : "布局页面",
+		"curpage" : 1, //当前页数
+		"catId" : 0, //分类ID
+		"lId" : 0, //标签ID
 	})
 }
 //置顶3篇文章
@@ -47,41 +50,5 @@ func GetTopBlog(this *gin.Context){
 	this.JSON(http.StatusOK, gin.H{
 		"code":code,
 		"data":datas,
-	})
-}
-//获取单篇文章
-func GetBlogInfo(this *gin.Context){
-	bId := this.Query("bId")
-	id, err := strconv.Atoi(bId)
-	if err != nil{
-		log.Fatalln(err)
-	}
-	var code int
-	data := GetBlogInfoData(id)
-	if data == nil{
-		code = 0
-		fmt.Println("blog data is empty")
-	}else{
-		code = 200
-	}
-	this.JSON(http.StatusOK, gin.H{
-		"code" : code,
-		"data" : data,
-	})
-}
-//获取文章分类列表
-func GetCategorys(this *gin.Context){
-	datas := GetCategoryList()
-	num := len(datas)
-	fmt.Println(num)
-	var code int
-	if num >0 {
-		code = 200
-	}else{
-		code = 0
-	}
-	this.JSON(http.StatusOK, gin.H{
-		"code" : code,
-		"data" : datas,
 	})
 }
