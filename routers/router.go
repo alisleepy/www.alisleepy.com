@@ -22,6 +22,6 @@ func InitRouter() *gin.Engine{
 	router.GET("/home/getBlogInfo", GetBlogInfo)     //获取单个文章
 	router.GET("/home/getCategorys", GetCategorys)   //获取文章分类列表
 	router.GET("/home/ajaxGetBlogs", AjaxGetBlogs)   //获取普通文章列表
-
+	router.GET("/home/ajaxGetBlogNum", AjaxGetBlogNum)  //获取博客总数
 	return router
 }

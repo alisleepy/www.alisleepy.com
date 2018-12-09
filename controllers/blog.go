@@ -77,3 +77,12 @@ func AjaxGetBlogs(this *gin.Context){
 		"data":data,
 	})
 }
+//获取博客总数
+func AjaxGetBlogNum(this *gin.Context){
+	//获取博客总数
+	blogNum := GetBlogNum()
+	this.JSON(http.StatusOK, gin.H{
+		"code":200,
+		"num":blogNum,
+	})
+}

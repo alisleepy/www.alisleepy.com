@@ -7,10 +7,10 @@
 package models
 
 import (
-	db "www.alisleepy.com/database"
-	"log"
 	"fmt"
+	"log"
 	"strconv"
+	db "www.alisleepy.com/database"
 )
 
 //定义每页数目
@@ -108,7 +108,6 @@ func GetBlogList(page int, cId int, lId int, keywords string)(blogs []Ali_blog){
 		if err = rows.Err(); err != nil {
 			return nil
 		}
-		return blogs
 	}else if lId >0 && cId==0{ //存在lId，不存在cId
 		rows, err := db.SqlDB.Query("SELECT blog.bId,blog.catId,blog.bTitle,blog.bInfo,blog.bPic,blog.bContent," +
 			"blog.lId,blog.add_time,blog.vViews,blog.vReply_num,blog.allowReply,cat.*,lab.* FROM ali_blog AS blog " +
@@ -127,7 +126,6 @@ func GetBlogList(page int, cId int, lId int, keywords string)(blogs []Ali_blog){
 		if err = rows.Err(); err != nil {
 			return nil
 		}
-		return blogs
 	}else if keywords != "" && lId == 0 && cId ==0{ //只有keywords
 		rows, err := db.SqlDB.Query("SELECT blog.bId,blog.catId,blog.bTitle,blog.bInfo,blog.bPic,blog.bContent," +
 			"blog.lId,blog.add_time,blog.vViews,blog.vReply_num,blog.allowReply,cat.*,lab.* FROM ali_blog AS blog " +
@@ -146,7 +144,6 @@ func GetBlogList(page int, cId int, lId int, keywords string)(blogs []Ali_blog){
 		if err = rows.Err(); err != nil {
 			return nil
 		}
-		return blogs
 	}else{
 		//初始情况走到这儿
 		rows, err := db.SqlDB.Query("SELECT blog.bId,blog.catId,blog.bTitle,blog.bInfo,blog.bPic,blog.bContent," +
@@ -162,12 +159,25 @@ func GetBlogList(page int, cId int, lId int, keywords string)(blogs []Ali_blog){
 			var blog Ali_blog   //定义一个结构体类型的
 			rows.Scan(&blog.BId, &blog.CatId, &blog.BTitle, &blog.BInfo, &blog.BPic, &blog.BContent, &blog.LId,
 				&blog.Add_time, &blog.VViews, &blog.VReply_num, &blog.AllowReply, &blog.CatId, &blog.CatName, &blog.LId, &blog.LName,)
-			fmt.Println("blog:",blog)
 			blogs = append(blogs, blog)
 		}
 		if err = rows.Err(); err != nil {
 			return nil
 		}
-		return blogs
 	}
+	//循环修改添加时间为日期格式
+	//for k, v := range blogs{
+	//	blogs[k]["add_time"] = time.Unix(v["add_time"], 0)
+	//}
+	return blogs
+}
+//获取博客总数
+func GetBlogNum()int{
+	blogNum, err := db.SqlDB.Query("select count(bId) as num from ali_blog where bStatus = 1")
+	if err != nil{
+		log.Fatalln(err)
+	}
+	fmt.Println(blogNum)
+	defer blogNum.Close()
+	return 1
 }

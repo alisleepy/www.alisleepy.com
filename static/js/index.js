@@ -11,8 +11,8 @@ $(function(){
     getBlogsCategorys();
     //获取文章列表（默认第一页）
     getPageBlogs();
-    // //获取统计信息
-    // getSiteCounts();
+    //获取统计信息
+    getSiteCounts();
     // //获取站长信息、
     // getUserInfo();
     // //获取点击排行前5的文章
@@ -41,8 +41,8 @@ function getTopBlogs(){
                     '   </h2>'+
                     '   <p class="note"><a href="/home/getBlogInfo?bId='+datas[i].bId+'">'+datas[i].bInfo+'</a></p>'+
                     '</article>';
-                topBlogObj.append(blog_html_str);
             }
+            topBlogObj.append(blog_html_str);
         }else{
             topBlogObj.append('<span>暂无推荐内容</span>');
         }
@@ -78,9 +78,50 @@ function getPageBlogs(){
         console.log(data);
         var blogObj = $("#blogs");
         if(data.code == 200){
-
+            var datas = data.data;
+            var blogs_html_str = '';
+            for(i in datas){
+                console.log(i);
+                var add_time = getLocalTime(datas[i].add_time);
+                blogs_html_str +=
+                    '<article class="excerpt excerpt-1" style="">' +
+                    '   <a class="focus" href="#" title="'+datas[i].bTitle+'">' +
+                    '       <img class="thumb" src="/static/images/201610181739277776.jpg" alt="'+datas[i].bTitle+'"  style="display: inline;">' +
+                    '   </a>' +
+                    '   <header>' +
+                    '       <a class="cat" href="#" title="'+datas[i].catName+'" >' +
+                    '           '+datas[i].catName+'<i></i>' +
+                    '       </a>' +
+                    '       <h2>' +
+                    '           <a href="#" title="'+datas[i].bTitle+'">'+datas[i].bTitle+'</a>' +
+                    '       </h2>' +
+                    '   </header>' +
+                    '   <p class="meta">' +
+                    '       <time class="time"><i class="glyphicon glyphicon-time"></i>'+add_time+'</time>' +
+                    '       <span class="views"><i class="glyphicon glyphicon-eye-open"></i>'+datas[i].vViews+'</span>' +
+                    '       <a class="comment" href="##comment" title="评论"><i class="glyphicon glyphicon-comment"></i>'+datas[i].vReply_num+'</a>' +
+                    '   </p>' +
+                    '   <p class="note">'+datas[i].bInfo+'</p>' +
+                    '</article>';
+            }
+            blogObj.append(blogs_html_str);
         }else{
             blogObj.append('<span>我可是有底线的！！</span>');
         }
     }, "json");
+}
+//js把时间戳转化为日期格式
+function getLocalTime(nS) {
+    return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+}
+//获取统计信息
+function getSiteCounts(){
+    var url = "/home/ajaxGetBlogNum";
+    $.get(url, function(data){
+        if(data.code == 200){
+            console.log(data.num);
+        }else{
+            console.log('未获取到博客总数')
+        }
+    },"json");
 }
