@@ -83,6 +83,6 @@ func AjaxGetBlogNum(this *gin.Context){
 	blogNum := GetBlogNum()
 	this.JSON(http.StatusOK, gin.H{
 		"code":200,
-		"num":blogNum,
+		"data":blogNum,
 	})
 }

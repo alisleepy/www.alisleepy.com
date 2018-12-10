@@ -34,6 +34,7 @@ type Ali_blog struct {
 	AllowReply int `json:"allowReply" form:"allowReply"`
 	CatName string `json:"catName" form:"catName"`
 	LName string `json:"lName" form:"lName"`
+	BlogNum int `json:blogNum`
 }
 
 //获取推荐文章，3条
@@ -172,12 +173,11 @@ func GetBlogList(page int, cId int, lId int, keywords string)(blogs []Ali_blog){
 	return blogs
 }
 //获取博客总数
-func GetBlogNum()int{
-	blogNum, err := db.SqlDB.Query("select count(bId) as num from ali_blog where bStatus = 1")
+func GetBlogNum()(b *Ali_blog){
+	var blogNum Ali_blog
+	err := db.SqlDB.QueryRow("select count(bId) as num from ali_blog where bStatus = 1").Scan(&blogNum.BlogNum)
 	if err != nil{
 		log.Fatalln(err)
 	}
-	fmt.Println(blogNum)
-	defer blogNum.Close()
-	return 1
+	return &blogNum
 }

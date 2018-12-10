@@ -14,7 +14,7 @@ $(function(){
     //获取统计信息
     getSiteCounts();
     // //获取站长信息、
-    // getUserInfo();
+    getUserInfo();
     // //获取点击排行前5的文章
     // getTopViewBlogs();
     // //获取友链
@@ -117,11 +117,24 @@ function getLocalTime(nS) {
 //获取统计信息
 function getSiteCounts(){
     var url = "/home/ajaxGetBlogNum";
-    $.get(url, function(data){
-        if(data.code == 200){
-            console.log(data.num);
+    $.get(url, function(json){
+        if(json.code == 200){
+            var blogNum = json.data.BlogNum;
+            $("#blogNum").html(blogNum);
         }else{
             console.log('未获取到博客总数')
+        }
+    },"json");
+}
+//获取个人信息
+function getUserInfo(){
+    var url = "/home/GetMyInfo";
+    $.get(url, function(json){
+        console.log(json);
+        if(json.code == 200){
+
+        }else{
+            console.log("未获取到个人信息");
         }
     },"json");
 }
