@@ -43,7 +43,7 @@
 
 				</div>
 				<!--文章列表 end-->
-				<nav class="pagination" style="display: none;">
+				<nav class="pagination" style="display: block;">
 					<ul>
 						<li class="prev-page"></li>
 						<li class="active"><span>1</span></li>
@@ -65,12 +65,12 @@
 						<div role="tabpanel" class="tab-pane contact active" id="notice">
 							<h2>文章总数: <span id="blogNum">888</span>篇</h2>
 							<!--后期增加当天天气信息-->
-							{{/*<h2>网站运行:<span id="sitetime">88天 </span></h2><h2>网站运行:<span id="sitetime">88天 </span></h2>*/}}
+							<h2>浏览次数：<span id="viewNum"></span>次</h2>
 						</div>
 						<div role="tabpanel" class="tab-pane contact" id="contact">
-							<h2>QQ:<a href="" rel="nofollow" data-toggle="tooltip" data-placement="bottom" title=""><span id="user_qq"></span></a>
+							<h2>QQ：<a href="" rel="nofollow" data-toggle="tooltip" data-placement="bottom" title=""><span id="user_qq"></span></a>
 							</h2>
-							<h2>Email:<a href="" data-toggle="tooltip" rel="nofollow" data-placement="bottom" title=""><span id="user_email" style="font-family: auto;"></span></a></h2>
+							<h2>Email：<a href="" data-toggle="tooltip" rel="nofollow" data-placement="bottom" title=""><span id="user_email" style="font-family: auto;"></span></a></h2>
 						</div>
 					</div>
 				</div>
@@ -86,22 +86,9 @@
 			</div>
 			<div class="widget widget_hot">
 				<h3>点击排行榜</h3>
-				<ul>
+				<ul id="topViewBlos">
 					<!--阅读数排行榜-->
-					<li>
-						<a title="用DTcms做一个独立博客网站（响应式模板）" href="#" >
-							<span class="thumbnail">
-								<img class="thumb" data-original="/static/images/201610181739277776.jpg" src="/static/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-							</span>
-							<span class="text">用DTcms做一个独立博客网站（响应式模板）</span>
-							<span class="muted">
-								<i class="glyphicon glyphicon-time"></i>2016-11-01
-							</span>
-							<span class="muted"><i class="glyphicon glyphicon-eye-open"></i>
-								88
-							</span>
-						</a>
-					</li>
+
 				</ul>
 			</div>
 			<div class="widget widget_sentence">

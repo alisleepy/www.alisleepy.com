@@ -181,3 +181,21 @@ func GetBlogNum()(b *Ali_blog){
 	}
 	return &blogNum
 }
+//获取点击最高的5片文章
+func GetTopViewsBlogs()(blogs []Ali_blog){
+	blogs = make([]Ali_blog,0) //定义一个切片存放数据
+	datas, err := db.SqlDB.Query("select bId, bTitle, bPic, add_time, vViews from ali_blog where bStatus = 1 order by vViews desc limit 5")
+	if err != nil{
+		log.Fatalln(err)
+	}
+	defer datas.Close()
+	for datas.Next(){
+		var blog Ali_blog
+		datas.Scan(&blog.BId, &blog.BTitle, &blog.BPic, &blog.Add_time, &blog.VViews)
+		blogs = append(blogs, blog)
+	}
+	if err = datas.Err(); err != nil {
+		return nil
+	}
+	return blogs
+}

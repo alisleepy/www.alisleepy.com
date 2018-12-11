@@ -15,8 +15,8 @@ $(function(){
     getSiteCounts();
     // //获取站长信息、
     getUserInfo();
-    // //获取点击排行前5的文章
-    // getTopViewBlogs();
+    //获取点击排行前5的文章
+    getTopViewBlogs();
     // //获取友链
     // getFriendlyUrls();
     // //获取底部备案信息
@@ -128,23 +128,53 @@ function getSiteCounts(){
 }
 //获取个人信息
 function getUserInfo(){
-    var url = "/home/GetMyInfo";
+    var url = "/home/getMyInfo";
     $.get(url, function(json){
         console.log(json);
         if(json.code == 200){
             var data = json.data;
             for(i in data){
-                if(data[i].key == 'qq'){
-                    console.log(data[i].value);
-                    $("#user_qq").text(data[i].value);
-                }else if(data[i].key == 'email'){
-                    console.log(data[i].value);
-                    $("#user_email").text(data[i].value);
-                    $("#user_email").parent().attr("href", 'mailto:'+data[i].value);
+                switch(data[i].key){
+                    case 'qq':
+                        $("#user_qq").text(data[i].value);
+                        break;
+                    case 'email':
+                        $("#user_email").text(data[i].value);
+                        $("#user_email").parent().attr("href", 'mailto:'+data[i].value);
+                        break;
+                    case 'viewNum':
+                        $("#viewNum").text(data[i].value);
+                        break;
                 }
             }
         }else{
             console.log("未获取到个人信息");
         }
     },"json");
+}
+//获取点击前5的文章
+function getTopViewBlogs(){
+    var url = "/home/getTopViewBlog";
+    $.get(url, function(json){
+        if(json.code == 200){
+            var datas = json.data;
+            var topViewBlogs_html_str = '';
+            for(i in datas){
+                topViewBlogs_html_str +=
+                    '<li>' +
+                    '   <a title="" href="" >' +
+                    '       <span class="thumbnail">' +
+                    '           <img class="thumb" src="/static/images/201610181739277776.jpg" alt="'+datas[i].bTitle+'"  style="display: block;">' +
+                    '       </span>' +
+                    '       <span class="text">'+datas[i].bTitle+'</span>' +
+                    '       <span class="muted"><i class="glyphicon glyphicon-time"></i>'+getLocalTime(datas[i].add_time)+'</span>' +
+                    '       <span class="muted"><i class="glyphicon glyphicon-eye-open"></i>'+datas[i].vViews+'</span>' +
+                    '   </a>' +
+                    '</li>';
+            }
+            $("#topViewBlos").append(topViewBlogs_html_str);
+        }else{
+            $("#topViewBlos").append('<span>暂无文章</span>');
+        }
+    }, "json");
 }

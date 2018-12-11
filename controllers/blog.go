@@ -86,3 +86,18 @@ func AjaxGetBlogNum(this *gin.Context){
 		"data":blogNum,
 	})
 }
+//获取点击排行前5的文章
+func GetTopViewBlogs(this *gin.Context){
+	datas := GetTopViewsBlogs()
+	var code int
+	num := len(datas)
+	if num > 0{
+		code = 200
+	}else{
+		code = 0
+	}
+	this.JSON(http.StatusOK, gin.H{
+		"code" : code,
+		"data" : datas,
+	});
+}

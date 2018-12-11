@@ -26,5 +26,5 @@ func main(){
 	router.LoadHTMLGlob("views/*")
 
 	//运行端口
-	router.Run(":306")
+	router.Run(":8888")
 }

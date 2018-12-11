@@ -5,9 +5,9 @@ import (
 	"net/http"
 	. "www.alisleepy.com/models"
 )
-
+//获取个人信息和浏览次数
 func GetMyInfo(this *gin.Context){
-	myInfo := GetMyInfos()
+	myInfo := GetMyInfosAndViewNum()
 	this.JSON(http.StatusOK, gin.H{
 		"code":200,
 		"data":myInfo,

@@ -13,8 +13,8 @@ type Ali_setting struct {
 }
 
 //获取个人信息
-func GetMyInfos()(infos []Ali_setting){
-	datas, err := db.SqlDB.Query("select `key`,`value` from ali_setting where `key`='qq' or `key` = 'email'")
+func GetMyInfosAndViewNum()(infos []Ali_setting){
+	datas, err := db.SqlDB.Query("select `key`,`value` from ali_setting where `key`='qq' or `key` = 'email' or `key` = 'viewNum'")
 	if err != nil{
 		log.Println(err)
 	}
@@ -28,4 +28,13 @@ func GetMyInfos()(infos []Ali_setting){
 		return nil
 	}
 	return infos
+}
+//获取浏览次数
+func GetViewsNum()(view *Ali_setting){
+	var viewNum Ali_setting
+	err := db.SqlDB.QueryRow("select `value` from ali_setting where `key` = 'viewNum'").Scan(&viewNum)
+	if err != nil{
+		log.Fatalln(err)
+	}
+	return &viewNum
 }
