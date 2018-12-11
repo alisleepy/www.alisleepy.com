@@ -132,7 +132,17 @@ function getUserInfo(){
     $.get(url, function(json){
         console.log(json);
         if(json.code == 200){
-
+            var data = json.data;
+            for(i in data){
+                if(data[i].key == 'qq'){
+                    console.log(data[i].value);
+                    $("#user_qq").text(data[i].value);
+                }else if(data[i].key == 'email'){
+                    console.log(data[i].value);
+                    $("#user_email").text(data[i].value);
+                    $("#user_email").parent().attr("href", 'mailto:'+data[i].value);
+                }
+            }
         }else{
             console.log("未获取到个人信息");
         }
