@@ -18,9 +18,7 @@ $(function(){
     //获取点击排行前5的文章
     getTopViewBlogs();
     // //获取友链
-    // getFriendlyUrls();
-    // //获取底部备案信息
-    // getFooterInfo();
+    getFriendlyUrls();
 })
 //获取推荐文章
 function getTopBlogs(){
@@ -177,4 +175,15 @@ function getTopViewBlogs(){
             $("#topViewBlos").append('<span>暂无文章</span>');
         }
     }, "json");
+}
+function getFriendlyUrls(){
+    var url = "/home/getFriendluUrl";
+    $.get(url, function(urls){
+        console.log(urls);
+        var jsonValue = urls.data.value;
+        if(jsonValue.length > 0){
+            var dataObj = JSON.parse(jsonValue);
+            console.log(dataObj);
+        }
+    },"json");
 }

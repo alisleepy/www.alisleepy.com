@@ -38,3 +38,12 @@ func GetViewsNum()(view *Ali_setting){
 	}
 	return &viewNum
 }
+//获取友链
+func GetFriendlyUrls()(urlinfo *Ali_setting){
+	var friendlyurls Ali_setting
+	err := db.SqlDB.QueryRow("select `value` from ali_setting where `key` = 'friendlyurl'").Scan(&friendlyurls.Value)
+	if err != nil{
+		log.Fatalln(err)
+	}
+	return &friendlyurls
+}

@@ -25,5 +25,6 @@ func InitRouter() *gin.Engine{
 	router.GET("/home/ajaxGetBlogNum", AjaxGetBlogNum)  //获取博客总数
 	router.GET("/home/getMyInfo", GetMyInfo)  //获取个人信息
 	router.GET("/home/getTopViewBlog", GetTopViewBlogs)  //获取点击最高的几篇文章
+	router.GET("/home/getFriendluUrl", GetFriendlyUrl);
 	return router
 }
