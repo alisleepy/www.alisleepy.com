@@ -30,7 +30,7 @@ func Index(this *gin.Context){
 	fmt.Println(t)
 	//渲染html文件
 	this.HTML(http.StatusOK,"index.html", gin.H{
-		"title" : "布局页面",
+		"title" : "alisleepy小站",
 		"curpage" : 1, //当前页数
 		"catId" : 0, //分类ID
 		"lId" : 0, //标签ID

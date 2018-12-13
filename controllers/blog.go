@@ -8,7 +8,12 @@ import (
 	. "www.alisleepy.com/models"
 	"strconv"
 )
-
+//单篇文章页面
+func BlogInfo(this *gin.Context){
+	this.HTML(http.StatusOK, "info.html", gin.H{
+		"title" : "文章详情",
+	})
+}
 //获取单篇文章
 func GetBlogInfo(this *gin.Context){
 	bId := this.Query("bId")

@@ -33,11 +33,11 @@ function getTopBlogs(){
                     '<article class="excerpt-minic excerpt-minic-index">'+
                     '   <h2>'+
                     '       <span class="red">【推荐】</span>'+
-                    '       <a href="/home/getBlogInfo?bId='+datas[i].bId+'" title="'+datas[i].bTitle+'" >'+
+                    '       <a href="/home/blogInfo?bId='+datas[i].bId+'" title="'+datas[i].bTitle+'" >'+
                                 datas[i].bTitle+
                     '       </a>'+
                     '   </h2>'+
-                    '   <p class="note"><a href="/home/getBlogInfo?bId='+datas[i].bId+'">'+datas[i].bInfo+'</a></p>'+
+                    '   <p class="note"><a href="/home/blogInfo?bId='+datas[i].bId+'">'+datas[i].bInfo+'</a></p>'+
                     '</article>';
             }
             topBlogObj.append(blog_html_str);
@@ -83,21 +83,21 @@ function getPageBlogs(){
                 var add_time = getLocalTime(datas[i].add_time);
                 blogs_html_str +=
                     '<article class="excerpt excerpt-1" style="">' +
-                    '   <a class="focus" href="#" title="'+datas[i].bTitle+'">' +
+                    '   <a class="focus" href="/home/blogInfo?bId="'+datas[i].bId+'" title="'+datas[i].bTitle+'">' +
                     '       <img class="thumb" src="/static/images/201610181739277776.jpg" alt="'+datas[i].bTitle+'"  style="display: inline;">' +
                     '   </a>' +
-                    '   <header>' +
+                    '   <header style="padding-top:12px;">' +
                     '       <a class="cat" href="#" title="'+datas[i].catName+'" >' +
                     '           '+datas[i].catName+'<i></i>' +
                     '       </a>' +
                     '       <h2>' +
-                    '           <a href="#" title="'+datas[i].bTitle+'">'+datas[i].bTitle+'</a>' +
+                    '           <a href="/home/blogInfo?bId='+datas[i].bId+'" title="'+datas[i].bTitle+'">'+datas[i].bTitle+'</a>' +
                     '       </h2>' +
                     '   </header>' +
                     '   <p class="meta">' +
                     '       <time class="time"><i class="glyphicon glyphicon-time"></i>'+add_time+'</time>' +
                     '       <span class="views"><i class="glyphicon glyphicon-eye-open"></i>'+datas[i].vViews+'</span>' +
-                    '       <a class="comment" href="##comment" title="评论"><i class="glyphicon glyphicon-comment"></i>'+datas[i].vReply_num+'</a>' +
+                    '       <a class="comment" href="/home/blogInfo?bId='+datas[i].bId+'" title="评论"><i class="glyphicon glyphicon-comment"></i>'+datas[i].vReply_num+'</a>' +
                     '   </p>' +
                     '   <p class="note">'+datas[i].bInfo+'</p>' +
                     '</article>';
@@ -160,7 +160,7 @@ function getTopViewBlogs(){
             for(i in datas){
                 topViewBlogs_html_str +=
                     '<li>' +
-                    '   <a title="" href="" >' +
+                    '   <a title="" href="/home/blogInfo?bId='+datas[i].bId+'" >' +
                     '       <span class="thumbnail">' +
                     '           <img class="thumb" src="/static/images/201610181739277776.jpg" alt="'+datas[i].bTitle+'"  style="display: block;">' +
                     '       </span>' +
@@ -176,14 +176,22 @@ function getTopViewBlogs(){
         }
     }, "json");
 }
+//获取友联
 function getFriendlyUrls(){
     var url = "/home/getFriendluUrl";
     $.get(url, function(urls){
         console.log(urls);
         var jsonValue = urls.data.value;
         if(jsonValue.length > 0){
-            var dataObj = JSON.parse(jsonValue);
-            console.log(dataObj);
+            var dataArr = JSON.parse(jsonValue);
+            var friendlyurl_html_str = '';
+            for(i in dataArr){
+                friendlyurl_html_str +=
+                    '<div class="widget-sentence-link">' +
+                    '   <a href="'+dataArr[i].url+'" title="'+dataArr[i].name+'" target="_blank" >'+dataArr[i].name+'</a>' +
+                    '</div>';
+            }
+            $("#friendlyUrl").append(friendlyurl_html_str)
         }
     },"json");
 }
