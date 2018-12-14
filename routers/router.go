@@ -18,8 +18,8 @@ func InitRouter() *gin.Engine{
 	//渲染html页面
 	router.LoadHTMLGlob("views/*")
 
+	router.GET("/home/blogInfo",BlogInfo)            //单个文章页面
 	router.GET("/home/getTopBlog", GetTopBlog)       //获取置顶文章列表
-	router.GET("/home/blogInfo",BlogInfo)
 	router.GET("/home/getBlogInfo", GetBlogInfo)     //获取单个文章接口
 	router.GET("/home/getCategorys", GetCategorys)   //获取文章分类列表
 	router.GET("/home/ajaxGetBlogs", AjaxGetBlogs)   //获取普通文章列表

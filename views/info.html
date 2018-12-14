@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+{{template "head" .}}
+<body class="user-select single">
+    {{template "header"}}
+    <!--当前文章bId-->
+    <input type="hidden" id="bId" value="{{.bId}}">
+    <section class="container">
+        <div class="content-wrap">
+            <div class="content">
+                <header class="article-header">
+                    <h1 class="article-title" id="bTitle">用DTcms做一个独立博客网站（响应式模板）</h1>
+                    <div class="article-meta">
+                        <span class="item article-meta-time">
+                            <time class="time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="发表时间�?2016-10-14">
+                                <i class="glyphicon glyphicon-time" id="add_time"></i>2016-10-14
+                            </time>
+                        </span>
+                        <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title="">
+                            <i class="glyphicon glyphicon-globe" id="aId"></i>木庄网络博客
+                        </span>
+                        <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom">
+                            <i class="glyphicon glyphicon-list" id="bCategory"></i>MZ-NetBlog主题
+                        </span>
+                        <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom">
+                            <i class="glyphicon glyphicon-eye-open" id="bViews"></i>219
+                        </span>
+                        <span class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom">
+                            <i class="glyphicon glyphicon-comment" b="bReplys"></i>4
+                        </span>
+                    </div>
+                </header>
+                <article class="article-content" id="bContent">
+                    <!--文章主体内容-->
+                </article>
+                <div class="article-tags">标签
+                    <a href="#list/2/" rel="tag" id="bLabel">DTcms博客</a>
+                </div>
+                <div class="title">
+                    <h3>评论</h3>
+                </div>
+                <div id="respond">
+                    <form id="comment-form" name="comment-form" action="" method="POST">
+                        <div class="comment">
+                            <input name="" id="" class="form-control" size="22" placeholder="您的昵称（必填）" maxlength="15" autocomplete="off" tabindex="1" type="text">
+                            <input name="" id="" class="form-control" size="22" placeholder="您的网址或邮箱（非必填）" maxlength="58" autocomplete="off" tabindex="2" type="text">
+                            <div class="comment-box">
+                                <textarea placeholder="您的评论或留言（必填）" name="comment-textarea" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>
+                                <div class="comment-ctrl">
+                                    <button type="submit" name="comment-submit" id="comment-submit" tabindex="4">评论</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="postcomments">
+                    <ol id="comment_list" class="commentlist">
+                        <!--显示评论内容-->
+                        <li class="comment-content"><span class="comment-f">#2</span><!--显示楼层-->
+                            <div class="comment-main">
+                                <p>
+                                    <!--评论者名称和时间和评论内容-->
+                                    木庄网络博客<span class="time">(2016/10/2811:41:03)</span><br>
+                                    不错的网站主题，看着相当舒服
+                                </p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <aside class="sidebar">
+            <div class="fixed">
+                <div class="widget widget-tabs">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#notice" aria-controls="notice" role="tab" data-toggle="tab" draggable="false">统计信息</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#contact" aria-controls="contact" role="tab" data-toggle="tab" draggable="false">联系站长</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane contact active" id="notice">
+                            <h2>文章总数: <span id="blogNum"></span>篇</h2>
+                            <!--后期增加当天天气信息-->
+                            <h2>浏览次数：<span id="viewNum"></span>次</h2>
+                        </div>
+                        <div role="tabpanel" class="tab-pane contact" id="contact">
+                            <h2>QQ：<a href="" rel="nofollow" data-toggle="tooltip" data-placement="bottom" title=""><span id="user_qq"></span></a>
+                            </h2>
+                            <h2>Email：<a href="" data-toggle="tooltip" rel="nofollow" data-placement="bottom" title=""><span id="user_email" style="font-family: auto;"></span></a></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget widget_search">
+                    <form class="navbar-form" action="/Search" method="post">
+                        <div class="input-group">
+                            <input type="text" name="keyword" class="form-control" size="35" placeholder="请输入关键字" maxlength="15" autocomplete="off">
+                            <span class="input-group-btn">
+								<button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
+							</span>
+                        </div>
+                    </form>
+                </div>
+                <div class="widget widget_hot">
+                    <h3>最新评论文章</h3>
+                    <ul>
+                        <li>
+                            <a title="用DTcms做一个独立博客网站（响应式模板）" href="#">
+                                <span class="thumbnail">
+                                    <img class="thumb" data-original="/static/images/201610181739277776.jpg" src="/static/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"style="display: block;">
+                                </span>
+                                <span class="text">
+                                    用DTcms做一个独立博客网站（响应式模板）
+                                </span>
+                                <span class="muted"><i class="glyphicon glyphicon-time"></i>
+                                    2016-11-01
+                                </span>
+                                <span class="muted"><i class="glyphicon glyphicon-eye-open"></i>
+                                    88
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="friendlyUrl" class="widget widget_sentence">
+                    <h3>友情链接</h3>
+                </div>
+            </div>
+        </aside>
+    </section>
+    {{template "footer"}}
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/info.js"></script>
+</body>
+</html>

@@ -16,7 +16,7 @@ var SqlDB * sql.DB
 
 func init()  {
 	var err error
-	SqlDB, err = sql.Open("mysql", "root:root@tcp(127.0.0.1)/www.wangkaikai.cn?charset=utf8")
+	SqlDB, err = sql.Open("mysql", "root:123456@tcp(127.0.0.1)/wangkaikai.cn?charset=utf8")
 	if err != nil{
 		log.Fatal(err.Error())
 	}

@@ -10,8 +10,10 @@ import (
 )
 //单篇文章页面
 func BlogInfo(this *gin.Context){
+	bId := this.Query("bId")
 	this.HTML(http.StatusOK, "info.html", gin.H{
 		"title" : "文章详情",
+		"bId" : bId,
 	})
 }
 //获取单篇文章
