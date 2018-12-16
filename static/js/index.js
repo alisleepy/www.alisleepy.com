@@ -24,8 +24,6 @@ function getBlogsCategorys(){
             var datas = data.data;
             var category_html_str = '';
             for(i in datas){
-                console.log(i);
-                console.log(datas[i].catName);
                 category_html_str += '<a href="javascript:void(0);" onclick=getCatBlogs('+datas[i].catId+');>'+datas[i].catName+'</a>';
             }
             categoryObj.append(category_html_str);
@@ -39,13 +37,14 @@ function getPageBlogs(curpage, catId, lId, keywords){
     var url = "/home/ajaxGetBlogs";
     var param = {curpage:curpage, catId:catId, lId:lId, keywords:keywords};
     $.get(url, param, function(data){
-        console.log(data);
+        //console.log(data);
+        resetGetmoreblog_a();
         var blogObj = $("#blogs");
         if(data.code == 200){
             var datas = data.data;
             var blogs_html_str = '';
             for(i in datas){
-                console.log(i);
+                //console.log(i);
                 var add_time = getLocalTime(datas[i].add_time);
                 blogs_html_str +=
                     '<article class="excerpt excerpt-1" style="">' +
@@ -70,9 +69,7 @@ function getPageBlogs(curpage, catId, lId, keywords){
             }
             blogObj.append(blogs_html_str);
         }else{
-            $("#getmoreblog_a").text("我可是有底线的！！!");
-            $("#getmoreblog_a").css("color", "red");
-            $("#getmoreblog_a").removeAttr("onclick");
+            removeGetmoreblog_a(); //修改a标签
         }
         //更新当前页码和标签id和分类id
         setPageAndCatIDAndlId(data.page, data.catId, data.lId, data.keywords)
@@ -98,5 +95,19 @@ function getMoreBlogs(){
 }
 //获取某个分类下的文章
 function getCatBlogs(catId){
+    //先把原来的数据清掉
+    $("#blogs").empty();
     getPageBlogs(1, catId, 0, "");
+}
+//去掉底部a标签
+function removeGetmoreblog_a(){
+    $("#getmoreblog_a").text("我可是有底线的！！!");
+    $("#getmoreblog_a").css("color", "red");
+    $("#getmoreblog_a").removeAttr("onclick");
+}
+//复原底部a标签
+function resetGetmoreblog_a(){
+    $("#getmoreblog_a").text("点击加载更多");
+    $("#getmoreblog_a").css("color", "#666");
+    $("#getmoreblog_a").attr("onclick","getMoreBlogs()");
 }

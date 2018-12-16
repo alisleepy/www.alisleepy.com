@@ -85,7 +85,7 @@ func GetBlogInfoData(id int)(b *Ali_blog){
 			&blog.CatName,
 			&blog.LName,
 			&blog.AName,
-		)
+	)
 	if err != nil{
 		log.Println(err)
 		return
@@ -105,8 +105,7 @@ func GetBlogList(page int, cId int, lId int, keywords string)(blogs []Ali_blog){
 			"INNER JOIN ali_category AS cat ON blog.catId = cat.catId " +
 			"INNER JOIN ali_label AS lab ON blog.lId = lab.lId " +
 			"WHERE blog.bStatus = 1  " +
-			"WHERE blog.catId = cat.catId  " +
-			"ORDER BY is_top DESC,vViews DESC LIMIT "+newStart+","+offset)
+			"AND blog.catId = ?  ORDER BY is_top DESC,vViews DESC LIMIT "+newStart+","+offset, cId)
 		defer rows.Close()
 		for rows.Next(){
 			var blog Ali_blog   //定义一个结构体类型的
@@ -118,13 +117,13 @@ func GetBlogList(page int, cId int, lId int, keywords string)(blogs []Ali_blog){
 			return nil
 		}
 	}else if lId >0 && cId==0{ //存在lId，不存在cId
-		rows, err := db.SqlDB.Query("SELECT blog.bId,blog.catId,blog.bTitle,blog.bInfo,blog.bPic,blog.bContent," +
+		rows, err := db.SqlDB.Query("SELECT blog.bId,blog.catId,blog.bTitle,blog.bInfo,blog.bPic,blog.bContent, " +
 			"blog.lId,blog.add_time,blog.vViews,blog.vReply_num,blog.allowReply,cat.*,lab.* FROM ali_blog AS blog " +
 			"INNER JOIN ali_category AS cat ON blog.catId = cat.catId " +
 			"INNER JOIN ali_label AS lab ON blog.lId = lab.lId " +
-			"WHERE blog.bStatus = 1  " +
-			"WHERE blog.lId = lab.lId  " +
-			"ORDER BY is_top DESC,vViews DESC LIMIT "+newStart+","+offset)
+			"WHERE blog.bStatus = 1 " +
+			"AND blog.lId = ? " +
+			"ORDER BY is_top DESC,vViews DESC LIMIT "+newStart+","+offset, lId)
 		defer rows.Close()
 		for rows.Next(){
 			var blog Ali_blog   //定义一个结构体类型的
@@ -174,10 +173,6 @@ func GetBlogList(page int, cId int, lId int, keywords string)(blogs []Ali_blog){
 			return nil
 		}
 	}
-	//循环修改添加时间为日期格式
-	//for k, v := range blogs{
-	//	blogs[k]["add_time"] = time.Unix(v["add_time"], 0)
-	//}
 	return blogs
 }
 //获取博客总数

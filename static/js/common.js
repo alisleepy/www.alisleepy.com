@@ -19,8 +19,8 @@ $(function(){
 function getTopBlogs(){
     var url = "/home/getTopBlog";
     $.get(url,function(data){
+        var topBlogObj = $("#topBlogs");
         if(data.code == 200){
-            var topBlogObj = $("#topBlogs");
             var datas = data.data;
             for(i in datas){
                 var blog_html_str = '';
@@ -109,7 +109,7 @@ function getTopViewBlogs(){
 function getFriendlyUrls(){
     var url = "/home/getFriendluUrl";
     $.get(url, function(urls){
-        console.log(urls);
+        //console.log(urls);
         var jsonValue = urls.data.value;
         if(jsonValue.length > 0){
             var dataArr = JSON.parse(jsonValue);
