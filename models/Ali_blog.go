@@ -35,6 +35,7 @@ type Ali_blog struct {
 	CatName string `json:"catName" form:"catName"`
 	LName string `json:"lName" form:"lName"`
 	BlogNum int `json:blogNum`
+	AName string `json:aName`
 }
 
 //获取推荐文章，3条
@@ -61,23 +62,30 @@ func GetTopBlogList()(blogs []Ali_blog){
 func GetBlogInfoData(id int)(b *Ali_blog){
 	fmt.Println(id)
 	var blog Ali_blog
-	err := db.SqlDB.QueryRow("select * from ali_blog where bId = ?", id).Scan(
-		&blog.BId,
-		&blog.AId,
-		&blog.CatId,
-		&blog.BTitle,
-		&blog.BInfo,
-		&blog.BPic,
-		&blog.BContent,
-		&blog.LId,
-		&blog.Is_top,
-		&blog.Add_time,
-		&blog.Update_time,
-		&blog.VViews,
-		&blog.VReply_num,
-		&blog.BStatus,
-		&blog.AllowReply,
-	)
+	//连表查询获取单条数据
+	err := db.SqlDB.QueryRow("select b.*, cat.catName,lab.lName,a.aName from ali_blog as b " +
+		"join ali_category as cat on b.catId = cat.catId " +
+		"join ali_admin as a on b.aId = a.aId " +
+		"join ali_label as lab on b.lId = lab.lId where b.bId = ?", id).Scan(
+			&blog.BId,
+			&blog.AId,
+			&blog.CatId,
+			&blog.BTitle,
+			&blog.BInfo,
+			&blog.BPic,
+			&blog.BContent,
+			&blog.LId,
+			&blog.Is_top,
+			&blog.Add_time,
+			&blog.Update_time,
+			&blog.VViews,
+			&blog.VReply_num,
+			&blog.BStatus,
+			&blog.AllowReply,
+			&blog.CatName,
+			&blog.LName,
+			&blog.AName,
+		)
 	if err != nil{
 		log.Println(err)
 		return
@@ -89,7 +97,7 @@ func GetBlogList(page int, cId int, lId int, keywords string)(blogs []Ali_blog){
 	blogs = make([]Ali_blog,0) //定义一个切片存放数据
 	var start int
 	var offset = pagesize
-	start = (page-1)*2
+	start = (page-1)*5
 	newStart := strconv.Itoa(start) //int转string（真tm烦，不转的话下边拼接sql语句报错，string不能和int拼接）
 	if cId > 0 && lId == 0{ //存在cId ,不存在lID
 		rows, err := db.SqlDB.Query("SELECT blog.bId,blog.catId,blog.bTitle,blog.bInfo,blog.bPic,blog.bContent," +

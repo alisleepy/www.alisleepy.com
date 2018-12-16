@@ -5,10 +5,14 @@
  * Time: 21:01
  */
 $(function(){
+    var curpage = $("#curpage").val();
+    var catId = $("#catId").val();
+    var lId = $("#lId").val();
+    var keywords = $("#keywords").val();
     //获取文章分类列表
     getBlogsCategorys();
     //获取文章列表（默认第一页）
-    getPageBlogs();
+    getPageBlogs(curpage, catId, lId, keywords);
 })
 
 //获取文章分类列表
@@ -22,7 +26,7 @@ function getBlogsCategorys(){
             for(i in datas){
                 console.log(i);
                 console.log(datas[i].catName);
-                category_html_str += '<a href="/home/getBlogsList?catId='+datas[i].catId+'">'+datas[i].catName+'</a>';
+                category_html_str += '<a href="javascript:void(0);" onclick=getCatBlogs('+datas[i].catId+');>'+datas[i].catName+'</a>';
             }
             categoryObj.append(category_html_str);
         }else{
@@ -31,12 +35,9 @@ function getBlogsCategorys(){
     }, "json");
 }
 //获取首页文章列表
-function getPageBlogs(){
-    var curpage = $("#curpage").val();
-    var catId = $("#catId").val();
-    var lId = $("#lId").val();
+function getPageBlogs(curpage, catId, lId, keywords){
     var url = "/home/ajaxGetBlogs";
-    var param = {curpage:curpage, catId:catId, lId:lId};
+    var param = {curpage:curpage, catId:catId, lId:lId, keywords:keywords};
     $.get(url, param, function(data){
         console.log(data);
         var blogObj = $("#blogs");
@@ -69,11 +70,33 @@ function getPageBlogs(){
             }
             blogObj.append(blogs_html_str);
         }else{
-            blogObj.append('<span>我可是有底线的！！</span>');
+            $("#getmoreblog_a").text("我可是有底线的！！!");
+            $("#getmoreblog_a").css("color", "red");
+            $("#getmoreblog_a").removeAttr("onclick");
         }
+        //更新当前页码和标签id和分类id
+        setPageAndCatIDAndlId(data.page, data.catId, data.lId, data.keywords)
     }, "json");
 }
-//js把时间戳转化为日期格式
-function getLocalTime(nS) {
-    return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+//更新当前页码和标签id和分类id
+function setPageAndCatIDAndlId(page, catId, lId, keywords){
+    $("#catId").val(catId);
+    $("#lId").val(lId);
+    $("#keywords").val(keywords);
+    var nextPage = parseInt(page) + 1;
+    $("#curpage").val(nextPage);
+    console.log("当前页码是："+page);
+    console.log("下一页页码是："+nextPage);
+}
+//加载更多文章
+function getMoreBlogs(){
+    var nextPage = $("#curpage").val();
+    var catId = $("#catId").val();
+    var lId = $("#lId").val();
+    var keywords = $("#keywords").val();
+    getPageBlogs(nextPage, catId, lId, keywords);
+}
+//获取某个分类下的文章
+function getCatBlogs(catId){
+    getPageBlogs(1, catId, 0, "");
 }

@@ -8,33 +8,14 @@
     <section class="container">
         <div class="content-wrap">
             <div class="content">
-                <header class="article-header">
-                    <h1 class="article-title" id="bTitle">用DTcms做一个独立博客网站（响应式模板）</h1>
-                    <div class="article-meta">
-                        <span class="item article-meta-time">
-                            <time class="time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="发表时间�?2016-10-14">
-                                <i class="glyphicon glyphicon-time" id="add_time"></i>2016-10-14
-                            </time>
-                        </span>
-                        <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title="">
-                            <i class="glyphicon glyphicon-globe" id="aId"></i>木庄网络博客
-                        </span>
-                        <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom">
-                            <i class="glyphicon glyphicon-list" id="bCategory"></i>MZ-NetBlog主题
-                        </span>
-                        <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom">
-                            <i class="glyphicon glyphicon-eye-open" id="bViews"></i>219
-                        </span>
-                        <span class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom">
-                            <i class="glyphicon glyphicon-comment" b="bReplys"></i>4
-                        </span>
-                    </div>
+                <header class="article-header" id="blog_header">
+                    <!--文章头部信息，包括：标题、作者、浏览次数、添加时间、评论次数、分类-->
                 </header>
                 <article class="article-content" id="bContent">
                     <!--文章主体内容-->
                 </article>
                 <div class="article-tags">标签
-                    <a href="#list/2/" rel="tag" id="bLabel">DTcms博客</a>
+                    <a href="#" rel="tag" id="bLabel"></a>
                 </div>
                 <div class="title">
                     <h3>评论</h3>
@@ -104,24 +85,9 @@
                     </form>
                 </div>
                 <div class="widget widget_hot">
-                    <h3>最新评论文章</h3>
-                    <ul>
-                        <li>
-                            <a title="用DTcms做一个独立博客网站（响应式模板）" href="#">
-                                <span class="thumbnail">
-                                    <img class="thumb" data-original="/static/images/201610181739277776.jpg" src="/static/images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"style="display: block;">
-                                </span>
-                                <span class="text">
-                                    用DTcms做一个独立博客网站（响应式模板）
-                                </span>
-                                <span class="muted"><i class="glyphicon glyphicon-time"></i>
-                                    2016-11-01
-                                </span>
-                                <span class="muted"><i class="glyphicon glyphicon-eye-open"></i>
-                                    88
-                                </span>
-                            </a>
-                        </li>
+                    <h3>点击排行榜</h3>
+                    <ul id="topViewBlos">
+
                     </ul>
                 </div>
                 <div id="friendlyUrl" class="widget widget_sentence">

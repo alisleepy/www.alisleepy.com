@@ -34,6 +34,7 @@ func Index(this *gin.Context){
 		"curpage" : 1, //当前页数
 		"catId" : 0, //分类ID
 		"lId" : 0, //标签ID
+		"keywords" : "", //搜索关键字
 	})
 }
 //置顶3篇文章

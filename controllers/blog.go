@@ -19,11 +19,13 @@ func BlogInfo(this *gin.Context){
 //获取单篇文章
 func GetBlogInfo(this *gin.Context){
 	bId := this.Query("bId")
+	fmt.Println(bId)
 	id, err := strconv.Atoi(bId)
 	if err != nil{
 		log.Fatalln(err)
 	}
 	var code int
+	fmt.Println(id)
 	data := GetBlogInfoData(id)
 	if data == nil{
 		code = 0
@@ -82,6 +84,10 @@ func AjaxGetBlogs(this *gin.Context){
 	this.JSON(http.StatusOK, gin.H{
 		"code":code,
 		"data":data,
+		"catId":catId,
+		"lId":lableId,
+		"page":curpage,
+		"keywords":keywords,
 	})
 }
 //获取博客总数
