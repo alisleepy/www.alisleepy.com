@@ -111,3 +111,9 @@ function resetGetmoreblog_a(){
     $("#getmoreblog_a").css("color", "#666");
     $("#getmoreblog_a").attr("onclick","getMoreBlogs()");
 }
+//根据关键词搜索
+$('button[name="search"]').click(function(){
+    var keywords = $('input[name="keywords"]').val();
+    $("#blogs").empty();
+    getPageBlogs(1, 0, 0, keywords);
+});

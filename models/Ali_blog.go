@@ -140,8 +140,8 @@ func GetBlogList(page int, cId int, lId int, keywords string)(blogs []Ali_blog){
 			"INNER JOIN ali_category AS cat ON blog.catId = cat.catId " +
 			"INNER JOIN ali_label AS lab ON blog.lId = lab.lId " +
 			"WHERE blog.bStatus = 1  " +
-			"AND (blog.bTitle LIKE %?% OR blog.bInfo LIKE %?% OR blog.bContent LIKE %?%)" +
-			"ORDER BY is_top DESC,vViews DESC LIMIT "+newStart+","+offset, keywords)
+			"AND blog.bTitle LIKE '%" + keywords + "%'" +
+			"ORDER BY is_top DESC,vViews DESC LIMIT "+newStart+","+offset)
 		defer rows.Close()
 		for rows.Next(){
 			var blog Ali_blog   //定义一个结构体类型的
