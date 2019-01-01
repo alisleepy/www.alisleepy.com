@@ -7,7 +7,6 @@
 package models
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 	db "www.alisleepy.com/database"
@@ -60,7 +59,6 @@ func GetTopBlogList()(blogs []Ali_blog){
 }
 //获取单篇文章
 func GetBlogInfoData(id int)(b *Ali_blog){
-	fmt.Println(id)
 	var blog Ali_blog
 	//连表查询获取单条数据
 	err := db.SqlDB.QueryRow("select b.*, cat.catName,lab.lName,a.aName from ali_blog as b " +

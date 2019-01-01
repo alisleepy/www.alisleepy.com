@@ -38,6 +38,15 @@ func GetViewsNum()(view *Ali_setting){
 	}
 	return &viewNum
 }
+//浏览次数+1
+/*func IncreaseViewNum(){
+	rs, err := db.SqlDB.Exec("update ali_setting set first_name = ?,last_name = ? where id = ?", p.FirstName, p.LastName, p.Id)
+	if err != nil {
+
+	}
+	pid, err := rs.RowsAffected()
+	fmt.Println(pid)
+}*/
 //获取友链
 func GetFriendlyUrls()(urlinfo *Ali_setting){
 	var friendlyurls Ali_setting

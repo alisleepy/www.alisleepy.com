@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
 {{template "head" .}}
+<!--引入markdown插件结束-->
 <body class="user-select single">
     {{template "header"}}
     <!--当前文章bId-->
@@ -10,42 +11,40 @@
             <div class="content">
                 <header class="article-header" id="blog_header">
                     <!--文章头部信息，包括：标题、作者、浏览次数、添加时间、评论次数、分类-->
+                    <h1 class="article-title" id="bTitle"></h1>
                 </header>
-                <article class="article-content" id="bContent">
+                <div class="article-content" id="bContent-div">
                     <!--文章主体内容-->
-                </article>
+                    {{/*<textarea style="display: none;" id="bContent"></textarea>*/}}
+
+                </div>
                 <div class="article-tags">标签
                     <a href="#" rel="tag" id="bLabel"></a>
                 </div>
-                <div class="title">
-                    <h3>评论</h3>
-                </div>
-                <div id="respond">
-                    <form id="comment-form" name="comment-form" action="" method="POST">
-                        <div class="comment">
-                            <input name="" id="" class="form-control" size="22" placeholder="您的昵称（必填）" maxlength="15" autocomplete="off" tabindex="1" type="text">
-                            <input name="" id="" class="form-control" size="22" placeholder="您的网址或邮箱（非必填）" maxlength="58" autocomplete="off" tabindex="2" type="text">
-                            <div class="comment-box">
-                                <textarea placeholder="您的评论或留言（必填）" name="comment-textarea" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>
-                                <div class="comment-ctrl">
-                                    <button type="submit" name="comment-submit" id="comment-submit" tabindex="4">评论</button>
+                <div id="postcomments" style="display: none;">
+                    <div class="title">
+                        <h3>评论</h3>
+                    </div>
+                    <div id="respond">
+                        <form id="comment-form" name="comment-form" action="" method="POST">
+                            <div class="comment">
+                                <input name="" id="" class="form-control" size="22" placeholder="您的昵称（必填）" maxlength="15" autocomplete="off" tabindex="1" type="text">
+                                <input name="" id="" class="form-control" size="22" placeholder="您的网址或邮箱（非必填）" maxlength="58" autocomplete="off" tabindex="2" type="text">
+                                <div class="comment-box">
+                                    <textarea placeholder="您的评论或留言（必填）" name="comment-textarea" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>
+                                    <div class="comment-ctrl">
+                                        <button type="submit" name="comment-submit" id="comment-submit" tabindex="4">评论</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-                <div id="postcomments">
+                <!--以下区域显示评论内容，异步获取-->
+                <div id="comments">
                     <ol id="comment_list" class="commentlist">
                         <!--显示评论内容-->
-                        <li class="comment-content"><span class="comment-f">#2</span><!--显示楼层-->
-                            <div class="comment-main">
-                                <p>
-                                    <!--评论者名称和时间和评论内容-->
-                                    木庄网络博客<span class="time">(2016/10/2811:41:03)</span><br>
-                                    不错的网站主题，看着相当舒服
-                                </p>
-                            </div>
-                        </li>
+
                     </ol>
                 </div>
             </div>
@@ -98,6 +97,15 @@
     </section>
     {{template "footer"}}
     <script src="/static/js/common.js"></script>
-    <script src="/static/js/info.js"></script>
+    <script src="/static/js/info.js" defer></script>
+    <!--引入markdown插件-->
+    <script src="/static/mdeditor/lib/marked.min.js"></script>
+    <script src="/static/mdeditor/lib/prettify.min.js"></script>
+    <script src="/static/mdeditor/lib/raphael.min.js"></script>
+    <script src="/static/mdeditor/lib/underscore.min.js"></script>
+    <script src="/static/mdeditor/lib/sequence-diagram.min.js"></script>
+    <script src="/static/mdeditor/lib/flowchart.min.js"></script>
+    <script src="/static/mdeditor/lib/jquery.flowchart.min.js"></script>
+    <script src="/static/mdeditor/editormd.js"></script>
 </body>
 </html>

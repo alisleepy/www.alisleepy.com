@@ -1,7 +1,8 @@
 $(function(){
     var bId = $("#bId").val();
     console.log(bId);
-    getTicketInfo(bId);
+    getTicketInfo(bId);   //获取文章详情
+    getTicketReplys(bId); //获取文章评论列表
 });
 
 function getTicketInfo(bId){
@@ -33,11 +34,69 @@ function getTicketInfo(bId){
                 '</div>';
             $("#blog_header").append(blogInfo_html_str);
             //添加主体内容
-            $("#bContent").append(blog.bContent);
+            $("#bContent-div").text(blog.bContent);
             //文章标签
             $("#bLabel").text(blog.lName);
+            showPostComments(blog.allowReply);
         }else{
-            
+            $("#blog_header").text("无内容！！!");
+            $("#bLabel").remove();
         }
     }, "json");
 }
+/*
+ * 显示发表评论区域
+ * @param allowReply int  是否允许评论 0/不允许，1/允许评论
+ */
+function showPostComments(allowReply){
+    console.log(allowReply);
+    if(allowReply == 1){
+        $("#postcomments").show();
+    }
+}
+/*
+ * 获取文章评论列表
+ * @param bId  文章id
+ */
+function getTicketReplys(bId){
+    if(bId){
+        var url = '/home/getBlogReplys';
+        $.get(url, {bId:bId}, function(json){
+            if(json.code == 200){
+                var data = json.data
+                var reply_html_str = '';
+                for(i in data){
+                    var grade = i + 1;
+                    reply_html_str += '<li class="comment-content"><span class="comment-f">#'+i+'</span>' +
+                        '                  <div class="comment-main">' +
+                        '                       <p>' + data[i].uName +
+                        '                           <span class="time">(2016/10/2811:41:03)</span><br>' + delHtmlTag(data[i].rContent) +
+                        '                       </p>' +
+                        '                  </div>' +
+                        '               </li>';
+                }
+                $("#comment_list").append(reply_html_str);
+            }else{
+                $("#comment_list").append('<span>该文章暂无评论</span>');
+            }
+        },"json");
+    }
+}
+//js去掉html标签
+var delHtmlTag = function (msg) {
+    var msg = msg.replace(/<\/?[^>]*>/g, ''); //去除HTML Tag
+    msg = msg.replace(/[|]*\n/, '') //去除行尾空格
+    msg = msg.replace(/&npsp;/ig, ''); //去掉npsp
+    return msg;
+}
+// $(function (){
+//     testEditor = editormd.markdownToHTML("bContent-div", {//注意：这里是上面DIV的id
+//         htmlDecode: "style,script,iframe",
+//         emoji: true,
+//         taskList: true,
+//         tex: true, // 默认不解析
+//         flowChart: true, // 默认不解析
+//         sequenceDiagram: true, // 默认不解析
+//         codeFold: true,
+//     });
+// });

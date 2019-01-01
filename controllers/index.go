@@ -28,6 +28,8 @@ func Index(this *gin.Context){
 		log.Fatal(err)
 	}
 	fmt.Println(t)
+	//每次进入首页，浏览数+1
+	//IncreaseViewNum();
 	//渲染html文件
 	this.HTML(http.StatusOK,"index.html", gin.H{
 		"title" : "alisleepy小站",
