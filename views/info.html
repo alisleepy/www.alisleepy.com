@@ -1,11 +1,31 @@
 <!doctype html>
 <html lang="zh-CN">
 {{template "head" .}}
+
+<script src="/static/js/common.js"></script>
+<script src="/static/js/info.js" defer></script>
+<!--引入markdown插件-->
+<script src="/static/mdeditor/lib/marked.min.js"></script>
+<script src="/static/mdeditor/lib/prettify.min.js"></script>
+<script src="/static/mdeditor/lib/raphael.min.js"></script>
+<script src="/static/mdeditor/lib/underscore.min.js"></script>
+<script src="/static/mdeditor/lib/sequence-diagram.min.js"></script>
+<script src="/static/mdeditor/lib/flowchart.min.js"></script>
+<script src="/static/mdeditor/lib/jquery.flowchart.min.js"></script>
+<script src="/static/mdeditor/editormd.js"></script>
 <!--引入markdown插件结束-->
 <body class="user-select single">
     {{template "header"}}
     <!--当前文章bId-->
     <input type="hidden" id="bId" value="{{.bId}}">
+    <!--当前页码-->
+    <input type="hidden" id="curpage" value="{{.curpage}}">
+    <!--当前分类ID-->
+    <input type="hidden" id="catId" value="{{.catId}}">
+    <!--当前标签ID-->
+    <input type="hidden" id="lId" value="{{.lId}}">
+    <!--关键词，搜搜内容-->
+    <input type="hidden" id="keywords" value="{{.keywords}}">
     <section class="container">
         <div class="content-wrap">
             <div class="content">
@@ -15,8 +35,7 @@
                 </header>
                 <div class="article-content" id="bContent-div">
                     <!--文章主体内容-->
-                    {{/*<textarea style="display: none;" id="bContent"></textarea>*/}}
-
+                    <textarea style="display: none;" id="bContent"></textarea>
                 </div>
                 <div class="article-tags">标签
                     <a href="#" rel="tag" id="bLabel"></a>
@@ -28,12 +47,12 @@
                     <div id="respond">
                         <form id="comment-form" name="comment-form" action="" method="POST">
                             <div class="comment">
-                                <input name="" id="" class="form-control" size="22" placeholder="您的昵称（必填）" maxlength="15" autocomplete="off" tabindex="1" type="text">
-                                <input name="" id="" class="form-control" size="22" placeholder="您的网址或邮箱（非必填）" maxlength="58" autocomplete="off" tabindex="2" type="text">
+                                <input name="uName" class="form-control" size="22" placeholder="您的昵称（必填）" maxlength="15" autocomplete="off" tabindex="1" type="text">
+                                <input name="uEmail" class="form-control" size="22" placeholder="您的网址或邮箱（非必填）" maxlength="58" autocomplete="off" tabindex="2" type="text">
                                 <div class="comment-box">
-                                    <textarea placeholder="您的评论或留言（必填）" name="comment-textarea" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>
+                                    <textarea placeholder="您的评论或留言（必填）" name="rContent" cols="100%" rows="3" style="width: 100%;" tabindex="3"></textarea>
                                     <div class="comment-ctrl">
-                                        <button type="submit" name="comment-submit" id="comment-submit" tabindex="4">评论</button>
+                                        <button type="button" name="comment-submit" id="comment-submit" tabindex="4">评论</button>
                                     </div>
                                 </div>
                             </div>
@@ -74,14 +93,12 @@
                     </div>
                 </div>
                 <div class="widget widget_search">
-                    <form class="navbar-form" action="/Search" method="post">
-                        <div class="input-group">
-                            <input type="text" name="keyword" class="form-control" size="35" placeholder="请输入关键字" maxlength="15" autocomplete="off">
-                            <span class="input-group-btn">
-								<button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
-							</span>
-                        </div>
-                    </form>
+                    <div class="input-group">
+                        <input type="text" name="keywords" class="form-control" size="35" placeholder="请输入关键字" maxlength="15" autocomplete="off">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
+                        </span>
+                    </div>
                 </div>
                 <div class="widget widget_hot">
                     <h3>点击排行榜</h3>
@@ -96,16 +113,6 @@
         </aside>
     </section>
     {{template "footer"}}
-    <script src="/static/js/common.js"></script>
-    <script src="/static/js/info.js" defer></script>
-    <!--引入markdown插件-->
-    <script src="/static/mdeditor/lib/marked.min.js"></script>
-    <script src="/static/mdeditor/lib/prettify.min.js"></script>
-    <script src="/static/mdeditor/lib/raphael.min.js"></script>
-    <script src="/static/mdeditor/lib/underscore.min.js"></script>
-    <script src="/static/mdeditor/lib/sequence-diagram.min.js"></script>
-    <script src="/static/mdeditor/lib/flowchart.min.js"></script>
-    <script src="/static/mdeditor/lib/jquery.flowchart.min.js"></script>
-    <script src="/static/mdeditor/editormd.js"></script>
+
 </body>
 </html>

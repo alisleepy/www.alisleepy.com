@@ -128,3 +128,7 @@ function getFriendlyUrls(){
 function getLocalTime(nS) {
     return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
 }
+//回到顶部
+function gotop(){
+    $("html,body").animate({scrollTop:0},200);
+}
