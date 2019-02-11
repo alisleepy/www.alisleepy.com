@@ -26,7 +26,7 @@ func AddUser(uName string, uEmail string)int64{
 	}
 	id, err := re.LastInsertId()
 	if err != nil{
-		log.Fatalln("add reply fail")
+		log.Fatalln("add user fail")
 		return 0
 	}
 	return id

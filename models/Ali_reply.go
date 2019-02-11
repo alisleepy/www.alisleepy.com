@@ -39,7 +39,7 @@ func AddReply(bId int, uId int64, rContent string)bool{
 	time := time.Now().Unix()
 	//rs, err := db.SqlDB.Exec("INSERT INTO person(first_name, last_name) VALUES (?, ?)", p.FirstName, p.LastName)
 	reply := Ali_reply{BId:bId, UId:uId, RContent:rContent}
-	_, err := db.SqlDB.Exec("INSERT INTO ali_reply(uId,bId,rContent,add_time) VALUE (?, ?, ?)", reply.UId, reply.BId, reply.RContent, time)
+	_, err := db.SqlDB.Exec("INSERT INTO ali_reply(uId,bId,rContent,add_time) VALUE (?, ?, ?,?)", reply.UId, reply.BId, reply.RContent, time)
 	if err != nil{
 		//添加失败
 		log.Fatalln("add reply fail")
