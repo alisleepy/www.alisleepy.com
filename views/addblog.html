@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+{{template "head" .}}
+
+<!--引入markdown插件-->
+<link rel="stylesheet" href="/static/mdeditor/css/editormd.css" />
+<script type="text/javascript" src="/static/mdeditor/editormd.js"></script>
+<!--引入markdown插件结束-->
+<body class="user-select single">
+{{template "header"}}
+
+<section class="container">
+    <form class="form-horizontal">
+        <div class="container">
+            <div class="row" style="padding: 20px 0">
+                <h2>添加文章</h2>
+            </div>
+            <div class="row form-group">
+                <label class="control-label col-lg-1" for="name">密钥凭据</label>
+                <div class="col-lg-2 col-md-6">
+                    <input class="form-control" name="code" id="code" type="text">
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class="control-label col-lg-1" for="name">文章标题</label>
+                <div class="col-lg-5 col-md-6">
+                    <input class="form-control" name="bTitle" id="bTitle" type="text">
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class="control-label col-lg-1">文章摘要</label>
+                <div class="col-lg-5 col-md-6">
+                    <textarea name="bInfo" id="bInfo" class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class="control-label col-lg-1">选择分类</label>
+                <div class="col-lg-2 col-md-6">
+                    <select name="catId" id="catId" class="form-control">
+                        <option>default</option>
+                        <option>one</option>
+                        <option>two</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class="control-label col-lg-1">选择标签</label>
+                <div class="col-lg-2 col-md-6">
+                    <select name="lId" id="lId" class="form-control">
+                        <option>default</option>
+                        <option>one</option>
+                        <option>two</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class="control-label col-lg-1">文章内容</label>
+                <div id="my-editormd" class="col-lg-5 col-md-6">
+                    <textarea id="bContent-doc" name="bContent-doc" type="text" style="display:none;" /></textarea>
+                    <textarea id="bContent-code" name="bContent-code" type="text" style="display:none;" /></textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class="control-label col-lg-1">是否审核</label>
+                <div class="col-lg-2 col-md-6">
+                    <select name="bStatus" id="bStatus" class="form-control">
+                        <option value="1">审核通过</option>
+                        <option value="0">未通过</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class="control-label col-lg-1">是否置顶</label>
+                <div class="col-lg-2 col-md-6">
+                    <select name="is_top" id="is_top" class="form-control">
+                        <option value="1">置顶显示</option>
+                        <option value="0" >不置顶</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class="control-label col-lg-1">允许评论</label>
+                <div class="col-lg-2 col-md-6">
+                    <select name="allowReply" id="allowReply" class="form-control">
+                        <option value="1">允许评论</option>
+                        <option value="0" >不允许评论</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+{{template "footer"}}
+<script type="text/javascript">
+    $(function() {
+        editormd("my-editormd", {//注意1：这里的就是上面的DIV的id属性值
+            width   : "100%",
+            height  : 700,
+            syncScrolling : "single",
+            path    : "./lib/",//注意2：你的路径
+            saveHTMLToTextarea : true,//注意3：这个配置，方便post提交表单
+        });
+    });
+</script>
+<script type="text/javascript" src="/static/js/addblog.js"></script>
+</body>
+</html>

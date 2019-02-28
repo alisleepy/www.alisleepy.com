@@ -29,5 +29,6 @@ func InitRouter() *gin.Engine{
 	router.GET("/home/getFriendluUrl", GetFriendlyUrl);  //获取友链
 	router.GET("/home/getBlogReplys", GetBlogReplys);    //获取文章评论列表
 	router.POST("/home/postReply", PostReply)  //发表评论
+	router.GET("/home/addBlog", AddBlog);  //添加文章
 	return router
 }

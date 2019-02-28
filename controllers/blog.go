@@ -114,3 +114,9 @@ func GetTopViewBlogs(this *gin.Context){
 		"data" : datas,
 	});
 }
+//添加文章
+func AddBlog(this *gin.Context){
+	this.HTML(http.StatusOK, "addblog.html", gin.H{
+		"title" : "添加文章",
+	})
+}
